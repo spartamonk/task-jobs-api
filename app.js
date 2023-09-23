@@ -9,6 +9,9 @@ const rateLimiter = require('express-rate-limit')
 const express = require('express')
 const app = express()
 const connectDB = require('./db/connect')
+const swaggerUI = require('swagger-ui-express')
+const YAML = require('yamljs')
+const swaggerDoc = YAML.load('./swaggerDoc.yaml')
 const {
   authMiddleware,
   errorHandlerMiddlware,
@@ -36,7 +39,7 @@ app.use(express.json())
 // parse static files
 app.use(express.static('./public'))
 // swaggerUI
-
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDoc))
 // routers
 app.use('/api/v1/auth', authRouter)
 app.use('/api/v1/jobs', authMiddleware, jobsRouter)
