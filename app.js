@@ -34,8 +34,8 @@ app.use(xss())
 
 app.use(express.json())
 // parse static files
-app.get('/', (req, res)=> {
-  res.send(200).send('<h1>Jobs API</h1><a href="/api-docs"></a>')
+app.get('/', (req, res) => {
+  res.status(200).send('<h1>Jobs API</h1><a href="/api-docs">Documentation</a>')
 })
 // swaggerUI
 
